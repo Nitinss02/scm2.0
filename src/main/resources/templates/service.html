@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- <div data-th-insert="~{base :: parent(~{::.thriedContext})}"> -->
+    <div data-th-insert="${isActive} ? ~{base :: parent(~{::.thriedContext})} : ~{base :: test}">
+        <section>
+            <h1>This is a section that you want to include content</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel facilis harum doloribus eius quae similique
+                perspiciatis voluptas molestiae consequatur eaque eligendi, libero dolore obcaecati earum fuga. Sint,
+                accusantium voluptatum. Perferendis.</p>
+        </section>
+        <div id="secondContext">
+            <p>This is an second contenet</p>
+        </div>
+        <div class="thriedContext">
+            <h1>This is an thried context</h1>
+        </div>
+    </div>
+</body>
+
+</html>

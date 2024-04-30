@@ -1,0 +1,7 @@
+To run the tailwindcss
+
+npx tailwindcss -i src/main/resources/static/css/input.css -o src/main/resources/static/css/output.css --watch
+
+include output.css in your html
+
+if you want flowbite: include css and javascript using cdn
