@@ -1,16 +1,33 @@
-<div th:fragment="parent(section)">
-    <h1>This is a parent class</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda fuga aperiam maiores labore, saepe repellat
-        ex. Error ullam aliquid eum saepe porro magni amet magnam eaque vero, quod, sit tempora!
-        Maxime nihil quos hic deleniti, nam ipsum amet, eius cum aliquid quaerat nostrum! Aspernatur dolor fugiat in,
-        iusto sapiente vero voluptates totam soluta maxime ipsa incidunt eum autem! Veniam, nisi.</p>
-    <p th:replace="${section}"></p>
-</div>
+<!DOCTYPE html>
+<html class="light" lang="en" th:fragment="parent(content,title,script)" xmlns:th="http://www.thymeleaf.org">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+    <link rel="stylesheet" th:href="@{'/css/output.css'}">
 
-<div th:fragment="test">
-    <h1>This is an test classs</h1>
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. A obcaecati incidunt sed, numquam rerum explicabo.
-        Beatae maxime nisi dolore, officiis similique in exercitationem, suscipit, nihil libero ad hic iste iure!</p>
+    <!-- font awsome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title th:replace="${title}">This is an base page </title>
+</head>
 
-</div>
+<body class="dark:bg-gray-900 dark:text-white bg-gray-200">
+
+    <!-- comman navbar -->
+    <div data-th-replace="~{navbar::navbar}"></div>
+
+    <div data-th-replace="${content}"></div>
+
+    <footer>
+        <h1>This is an footer</h1>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    <script data-th-src="@{/js/script.js}"></script>
+    <th:block data-th-replace="${script}"></th:block>
+</body>
+
+</html>

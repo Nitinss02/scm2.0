@@ -1,14 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" th:replace="~{base :: parent(~{::#content},~{::title},~{::script})}">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>This is an about page</title>
 </head>
 
 <body>
-    <h1>This is about page</h1>
+    <div id="content">
+        <h1>This is an about page</h1>
+        <h2>we can perfrom about opertation in it</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, vel similique esse accusamus recusandae
+            mollitia. Eos facere nobis autem voluptates natus illum adipisci deserunt possimus odio, doloribus, fugiat
+            vero sit.</p>
+    </div>
+    <script>
+        console.log("This is about page console");
+    </script>
 </body>
 
 </html>
