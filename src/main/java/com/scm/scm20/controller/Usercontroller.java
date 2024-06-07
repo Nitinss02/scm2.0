@@ -1,23 +1,34 @@
 package com.scm.scm20.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import com.scm.scm20.services.userServices;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 @RequestMapping("/user")
 public class Usercontroller {
     // user dashbord page
 
-    @RequestMapping("/dashboard")
+    private Logger logger = LoggerFactory.getLogger(Usercontroller.class);
+
+    @Autowired
+    private userServices userService;
+
+    @RequestMapping(value = "/dashboard")
     public String userDashboard() {
+        System.out.println("User dashboard");
         return "user/dashboard";
     }
 
     // add user contact page
 
-    @RequestMapping("/signup")
+    @RequestMapping(value = "/signup")
     public String usersignup() {
         return "user/signup";
     }

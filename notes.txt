@@ -5,3 +5,8 @@ npx tailwindcss -i src/main/resources/static/css/input.css -o src/main/resources
 include output.css in your html
 
 if you want flowbite: include css and javascript using cdn
+
+
+Client Id : 1031418315265-bve2t61b16glu85ige5uondq0hcpa6d4.apps.googleusercontent.com
+
+Client secrate : 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

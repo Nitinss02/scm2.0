@@ -11,6 +11,7 @@ public class sessionHelper {
     public static void RemoveMessage() {
         try {
             System.out.println("Remove the message");
+            @SuppressWarnings("null")
             HttpSession session = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest()
                     .getSession();
             session.removeAttribute("message");

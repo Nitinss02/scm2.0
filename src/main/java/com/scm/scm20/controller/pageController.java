@@ -33,6 +33,11 @@ public class pageController {
         return "home";
     }
 
+    @GetMapping("/")
+    public String index() {
+        return "redirect:/home";
+    }
+
     @GetMapping("/about")
     public String aboutHandler(Model model) {
         return "about";
