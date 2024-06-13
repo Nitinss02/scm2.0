@@ -9,8 +9,6 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
-import org.springframework.security.oauth2.core.OAuth2AccessToken;
-import org.springframework.security.oauth2.core.endpoint.DefaultOAuth2AccessTokenResponseMapConverter;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -45,13 +43,13 @@ public class oauthenticationSucessHandler implements AuthenticationSuccessHandle
 
         String authorizedClientRegistrationId = OAuth2AuthenticationToken.getAuthorizedClientRegistrationId();
 
-        logger.info(authorizedClientRegistrationId);
+        // logger.info(authorizedClientRegistrationId);
 
         var oauthuser = (DefaultOAuth2User) authentication.getPrincipal();
 
-        oauthuser.getAttributes().forEach((key, value) -> {
-            logger.info(key + " ->" + value);
-        });
+        // oauthuser.getAttributes().forEach((key, value) -> {
+        // logger.info(key + " ->" + value);
+        // });
 
         user user = new user();
         user.setUserId(UUID.randomUUID().toString());
@@ -69,19 +67,21 @@ public class oauthenticationSucessHandler implements AuthenticationSuccessHandle
             user.setProvider(porviders.GOOGLE);
             user.setAbout("This account is created form google");
             // google authentication
-        } else if (authorizedClientRegistrationId.equalsIgnoreCase("github")) {
+        } else if (authorizedClientRegistrationId.equalsIgnoreCase("GitHub")) {
             // github authentication
 
-            String email = oauthuser.getAttribute("email") != null ? oauthuser.getAttribute("email")
-                    : oauthuser.getAttribute("login") + "@gmail.com";
-            String picture = oauthuser.getAttribute("avatar_url");
-            String name = oauthuser.getAttribute("login");
-            String providerId = oauthuser.getName();
+            // String email = oauthuser.getAttribute("email") != null ?
+            // oauthuser.getAttribute("email")
+            // : oauthuser.getAttribute("login") + "@gmail.com";
+            // String picture = oauthuser.getAttribute("avatar_url");
+            // String name = oauthuser.getAttribute("login");
+            // String providerId = oauthuser.getName();
 
-            user.setEmail(email);
-            user.setProfilepic(picture);
-            user.setName(name);
-            user.setProviderId(providerId);
+            user.setEmail(oauthuser.getAttribute("email") != null ? oauthuser.getAttribute("email")
+                    : oauthuser.getAttribute("login") + "@gmail.com");
+            user.setProfilepic(oauthuser.getAttribute("avatar_url"));
+            user.setName(oauthuser.getAttribute("login"));
+            user.setProviderId(oauthuser.getName());
             user.setProvider(porviders.GITHUB);
             user.setAbout("This account is created form GitHub");
         } else if (authorizedClientRegistrationId.equalsIgnoreCase("facebook")) {

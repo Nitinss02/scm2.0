@@ -20,5 +20,6 @@ public interface userServices {
 
     boolean isuserExistByEmail(String email);
 
-    Optional<user> getUserByEmail(String email);
+    user getUserByEmail(String email);
+
 }

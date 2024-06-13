@@ -101,6 +101,6 @@ public class pageController {
 
         message msg = message.builder().content("Registration Sucessfully").type(messageType.yellow).build();
         session.setAttribute("message", msg);
-        return "redirect:/login";
+        return "redirect:/register";
     }
 }

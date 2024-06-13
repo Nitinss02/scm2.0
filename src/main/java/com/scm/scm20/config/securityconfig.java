@@ -59,7 +59,7 @@ public class securityconfig {
             formLogin.loginProcessingUrl("/authenticate");
             formLogin.successForwardUrl("/user/profile");
             formLogin.failureForwardUrl("/login?error=true");
-            formLogin.defaultSuccessUrl("/user/dashboard");
+            formLogin.defaultSuccessUrl("/user/profile");
             formLogin.usernameParameter("email");
             formLogin.passwordParameter("password");
 
@@ -69,7 +69,7 @@ public class securityconfig {
         // oauth configurations
 
         httpSecurity.oauth2Login(oauth -> {
-            oauth.loginPage("/login");
+            oauth.loginPage("/login/oauth/authorize");
             oauth.successHandler(handler);
         });
 
