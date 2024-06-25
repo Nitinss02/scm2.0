@@ -99,7 +99,7 @@ public class pageController {
         System.out.println(saveUser);
         System.out.println("Process Registration");
 
-        message msg = message.builder().content("Registration Sucessfully").type(messageType.yellow).build();
+        message msg = message.builder().content("Registration Sucessfully").type(messageType.green).build();
         session.setAttribute("message", msg);
         return "redirect:/register";
     }

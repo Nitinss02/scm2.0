@@ -18,13 +18,13 @@
 
                     <div
                         class="card block  p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                        <div data-th-replace="message::messagebox"></div>
+                        <div data-th-replace="~{message::messagebox}"></div>
                         <h1 class="text-3xl font-semibold">Add New Contact</h1>
                         <p class="text-gray-500">This contact will be stored on cloude, you can direct email this client
                             form scm...</p>
 
                         <form data-th-action="@{'/user/contact/add'}" novalidate method="post"
-                            data-th-object="${contactform}" class="mt-5">
+                            data-th-object="${contactform}" enctype="multipart/form-data" class="mt-5">
                             <!-- name field -->
                             <div class="mb-3">
                                 <label for="input-group-1"
@@ -144,8 +144,8 @@
                                     for="file_input">Upload Contact Picture</label>
                                 <input
                                     class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                                    id="file_input" type="file">
-
+                                    data-th-field="*{contactImage}" type="file" id="image_file_input">
+                                <img src="" class="max-h-48 p-2 mx-auto" id="Upload_image_preview" alt="">
                             </div>
                             <!-- favourite Checkbox -->
                             <div class="mb-3">
@@ -173,6 +173,7 @@
 
     </div>
     </div>
+    <script data-th-src="@{'/js/admin.js'}"></script>
     <script>
         console.log("This is profile page console");
     </script>

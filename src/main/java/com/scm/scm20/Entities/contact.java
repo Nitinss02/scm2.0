@@ -35,7 +35,7 @@ public class contact {
     private boolean favourite = false;
     private String websiteLink;
     private String Linkedinlink;
-
+    private String cloudinaryImagePublicId;
     @ManyToOne
     @JsonIgnore
     private user user;

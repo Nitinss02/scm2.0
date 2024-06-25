@@ -1,0 +1,50 @@
+<div data-th-fragment="content">
+
+    <!-- Main modal -->
+    <div id="view_contact_model" tabindex="-1" aria-hidden="true"
+        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-2xl max-h-full">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <!-- Modal header -->
+                <div class=" bg-white dark:bg-gray-900 rounded-lg overflow-hidden shadow-lg">
+                    <div class="border-b px-4 pb-6"> <img
+                            class="h-32 w-32 rounded-full border-2 border-white dark:border-gray-800 mx-auto my-4"
+                            id="profile_img">
+                        <p id="contact_favourite" class="absolute left-1/2 top-24"></p>
+                    </div>
+                    <div class="text-center space-y-3">
+                        <p class=" text-3xl font-semibold leading-relaxed text-gray-900 dark:text-white">
+                            <span id="contact_name"></span>
+                        </p>
+                        <p class=" text-xl font-semibold leading-relaxed text-gray-900 dark:text-white space-x-2"><i
+                                class="fa-solid fa-envelope"></i><span id="contact_email"></span> </p>
+                        <p class=" text-xl font-semibold leading-relaxed text-gray-900 dark:text-white"><i
+                                class="fa-solid fa-phone"></i>
+                            <span id="Phone_number"></span>
+                        </p>
+                        <p class=" text-xl font-semibold leading-relaxed text-gray-900 dark:text-white"><i
+                                class="fa-solid fa-location-dot"></i><span id="address"></span></p>
+                        <p class=" text-xl font-semibold leading-relaxed text-gray-900 dark:text-white"><i
+                                class="fa-regular fa-clipboard"></i> <span id="contact_decription"></span></p>
+
+                        <p class=" text-xl font-semibold leading-relaxed text-gray-900 dark:text-white"><i
+                                class="fa-solid fa-earth-americas"></i> <span id="websiteLink"></span></p>
+                        <a href="" id="websiteLink"></a>
+                        <p class=" text-xl font-semibold leading-relaxed text-gray-900 dark:text-white">
+                            <i class="fa-brands fa-linkedin"></i> <span id="LinkedIn"></span>
+                        </p>
+                        <a href="" id="LinkedIn"></a>
+                    </div>
+                    <div class="flex gap-2 px-2 m-2">
+                        <button type="button" data-th-onclick="closeContactModule()"
+                            class="flex-1 rounded-full bg-blue-600 dark:bg-blue-800 text-white dark:text-white antialiased font-bold hover:bg-blue-800 dark:hover:bg-blue-900 px-4 py-2">
+                            close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
