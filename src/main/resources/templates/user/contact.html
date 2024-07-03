@@ -15,6 +15,7 @@
             <div class="p-3">
                 <h1 class="text-5xl text-center">All Your Contact</h1>
                 <p class="text-center">List of all Contact</p>
+                <div data-th-replace="~{message :: messagebox}"></div>
                 <div class="contact_container">
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                         <form action="" data-th-action="@{'/user/contact/search'}"
@@ -103,9 +104,12 @@
                                     </td>
                                     <td class="px-6 py-4">
                                         <div class="space-x-2">
-                                            <a data-th-href="@{'/user/conatact/delete/'+*{id}}"><i
-                                                    class="fa-solid fa-trash w-5 h-5"></i></a>
-                                            <a href=""><i class="fa-solid fa-pen-to-square w-5 h-5"></i></a>
+                                            <!-- <a data-th-href="@{'/user/contact/delete/'+*{id}}"><i
+                                                    class="fa-solid fa-trash w-5 h-5"></i></a> -->
+                                            <button data-th-onclick="DeleteContact([[${c.id}]])"><i
+                                                    class="fa-solid fa-trash w-5 h-5"></i></button>
+                                            <a data-th-href="@{'/user/contact/view/'+*{id}}"><i
+                                                    class="fa-solid fa-pen-to-square w-5 h-5"></i></a>
                                             <button data-th-onclick="loadConatactData([[${c.id}]])"><i
                                                     class="fa-solid fa-eye w-5 h-5"></i></button>
                                         </div>

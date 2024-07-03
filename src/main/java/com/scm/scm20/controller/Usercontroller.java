@@ -1,19 +1,12 @@
 package com.scm.scm20.controller;
 
-import java.util.Optional;
 import org.springframework.ui.Model;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.scm.scm20.Entities.user;
-import com.scm.scm20.Helper.Helper;
-import com.scm.scm20.repositories.userRepo;
-import com.scm.scm20.services.userServices;
 
 @Controller
 @RequestMapping("/user")
@@ -26,6 +19,7 @@ public class Usercontroller {
     public String userDashboard() {
 
         System.out.println("User dashboard");
+
         return "user/dashboard";
     }
 
@@ -33,6 +27,7 @@ public class Usercontroller {
 
     @RequestMapping(value = "/signup")
     public String usersignup() {
+        logger.info("Its is a user signUp page");
         return "user/signup";
     }
     // user view page

@@ -24,18 +24,18 @@ public class pageController {
     @Autowired
     private userServices userServices;
 
-    @GetMapping("/home")
+    @GetMapping("/index")
     public String homeHandler(Model m) {
         m.addAttribute("name", "This is home page name");
         m.addAttribute("education", "Bachlor of computer scicence");
         m.addAttribute("google", "https://www.google.co.in/webhp");
         System.out.println("Home page Handler");
-        return "home";
+        return "index";
     }
 
     @GetMapping("/")
     public String index() {
-        return "redirect:/home";
+        return "redirect:/index";
     }
 
     @GetMapping("/about")

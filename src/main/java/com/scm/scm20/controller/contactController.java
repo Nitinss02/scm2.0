@@ -10,10 +10,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import com.scm.scm20.Entities.contact;
 import com.scm.scm20.Entities.user;
 import com.scm.scm20.Helper.AppConstants;
@@ -155,10 +157,69 @@ public class contactController {
     // delete contact
 
     @RequestMapping("/delete/{contactId}")
-    public String DeleteHandler(@PathVariable("contactId") String contactId) {
+    public String DeleteHandler(@PathVariable("contactId") String contactId, HttpSession session) {
         contactService.delete(contactId);
-        logger.info(contactId);
-        return "redirct:/user/contact";
+        logger.info("contact {} deleted", contactId);
+        session.setAttribute("message",
+                message.builder().content("contact Delete Sucessfully").type(messageType.blue).build());
+        return "redirect:/user/contact";
+    }
+
+    @GetMapping("/view/{contactId}")
+    public String updateContactView(@PathVariable("contactId") String contactId, Model model) {
+        var contact = contactService.getById(contactId);
+        Contactform contactform = new Contactform();
+        contact.setName(contactform.getName());
+        contact.setEmail(contactform.getEmail());
+        contact.setPhoneNumber(contactform.getPhoneNumber());
+        contact.setAddress(contactform.getAddress());
+        contact.setDescription(contactform.getDescription());
+        contact.setWebsiteLink(contactform.getWebsitelink());
+        contact.setLinkedinlink(contactform.getLinkedinlink());
+        contact.setFavourite(contactform.isFavourite());
+        contact.setPicture(contactform.getPicture());
+        model.addAttribute("contactform", contactform);
+        model.addAttribute("contactId", contactId);
+        return "user/upadateContactView";
+    }
+
+    @RequestMapping(value = "/update/{contactId}", method = RequestMethod.POST)
+    public String UpdateContact(@PathVariable("contactId") String contactId,
+            @Valid @ModelAttribute Contactform contactForm, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "user/upadateContactView";
+        }
+        var con = contactService.getById(contactId);
+        con.setId(contactId);
+        con.setName(contactForm.getName());
+        con.setEmail(contactForm.getEmail());
+        con.setPhoneNumber(contactForm.getPhoneNumber());
+        con.setAddress(contactForm.getAddress());
+        con.setDescription(contactForm.getDescription());
+        con.setFavourite(contactForm.isFavourite());
+        con.setWebsiteLink(contactForm.getWebsitelink());
+        con.setLinkedinlink(contactForm.getLinkedinlink());
+
+        // process image:
+
+        if (contactForm.getContactImage() != null && !contactForm.getContactImage().isEmpty()) {
+            logger.info("file is not empty");
+            String fileName = UUID.randomUUID().toString();
+            String imageUrl = imageService.UploadImage(contactForm.getContactImage(), fileName);
+            con.setCloudinaryImagePublicId(fileName);
+            con.setPicture(imageUrl);
+            contactForm.setPicture(imageUrl);
+
+        } else {
+            logger.info("file is empty");
+        }
+
+        var updateCon = contactService.update(con);
+        logger.info("updated contact {}", updateCon);
+
+        model.addAttribute("message", message.builder().content("Contact Updated !!").type(messageType.green).build());
+
+        return "redirect:/user/contact/view/" + contactId;
     }
 
 }
