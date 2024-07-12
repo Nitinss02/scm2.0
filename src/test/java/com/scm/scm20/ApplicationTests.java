@@ -10,4 +10,12 @@ class ApplicationTests {
 	void contextLoads() {
 	}
 
+	@Autowired
+	private mailService service;
+
+	@Test
+
+	void MailSenderTest() {
+		service.sendMail("sonawanenitin726@gmail.com", "Just Testing email", "This is testing email service");
+	}
 }
