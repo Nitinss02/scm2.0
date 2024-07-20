@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import com.scm.scm20.Entities.contact;
 import com.scm.scm20.Entities.user;
 import com.scm.scm20.Helper.AppConstants;
@@ -166,29 +165,39 @@ public class contactController {
     }
 
     @GetMapping("/view/{contactId}")
-    public String updateContactView(@PathVariable("contactId") String contactId, Model model) {
+    public String updateContactFormView(
+            @PathVariable("contactId") String contactId,
+            Model model) {
+
         var contact = contactService.getById(contactId);
-        Contactform contactform = new Contactform();
-        contact.setName(contactform.getName());
-        contact.setEmail(contactform.getEmail());
-        contact.setPhoneNumber(contactform.getPhoneNumber());
-        contact.setAddress(contactform.getAddress());
-        contact.setDescription(contactform.getDescription());
-        contact.setWebsiteLink(contactform.getWebsitelink());
-        contact.setLinkedinlink(contactform.getLinkedinlink());
-        contact.setFavourite(contactform.isFavourite());
-        contact.setPicture(contactform.getPicture());
-        model.addAttribute("contactform", contactform);
+        Contactform contactForm = new Contactform();
+        contactForm.setName(contact.getName());
+        contactForm.setEmail(contact.getEmail());
+        contactForm.setPhoneNumber(contact.getPhoneNumber());
+        contactForm.setAddress(contact.getAddress());
+        contactForm.setDescription(contact.getDescription());
+        contactForm.setFavourite(contact.isFavourite());
+        contactForm.setWebsitelink(contact.getWebsiteLink());
+        contactForm.setLinkedinlink(contact.getLinkedinlink());
+        contactForm.setPicture(contact.getPicture());
+        model.addAttribute("contactform", contactForm);
         model.addAttribute("contactId", contactId);
-        return "user/upadateContactView";
+
+        return "user/updateContactView";
     }
 
     @RequestMapping(value = "/update/{contactId}", method = RequestMethod.POST)
-    public String UpdateContact(@PathVariable("contactId") String contactId,
-            @Valid @ModelAttribute Contactform contactForm, BindingResult bindingResult, Model model) {
+    public String updateContact(@PathVariable("contactId") String contactId,
+            @Valid @ModelAttribute Contactform contactForm,
+            HttpSession session,
+            BindingResult bindingResult,
+            Model model) {
+
+        // update the contact
         if (bindingResult.hasErrors()) {
-            return "user/upadateContactView";
+            return "user/updateContactView";
         }
+
         var con = contactService.getById(contactId);
         con.setId(contactId);
         con.setName(contactForm.getName());
@@ -217,7 +226,11 @@ public class contactController {
         var updateCon = contactService.update(con);
         logger.info("updated contact {}", updateCon);
 
-        model.addAttribute("message", message.builder().content("Contact Updated !!").type(messageType.green).build());
+        // model.addAttribute("message", message.builder().content("Contact Updated
+        // !!").type(messageType.green).build());
+
+        session.setAttribute("message",
+                message.builder().content("contact Update Sucessfully").type(messageType.blue).build());
 
         return "redirect:/user/contact/view/" + contactId;
     }

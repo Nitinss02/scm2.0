@@ -13,7 +13,9 @@ import org.springframework.stereotype.Service;
 import com.scm.scm20.Entities.user;
 import com.scm.scm20.Helper.ResourceIsNotFound;
 import com.scm.scm20.Helper.AppConstants;
+import com.scm.scm20.Helper.Helper;
 import com.scm.scm20.repositories.userRepo;
+import com.scm.scm20.services.EmailService;
 import com.scm.scm20.services.userServices;
 
 @Service
@@ -23,6 +25,9 @@ public class serviceImpl implements userServices {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private EmailService mailService;
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -41,7 +46,12 @@ public class serviceImpl implements userServices {
 
         logger.info(user.getProvider().toString());
 
-        return userRepo.save(user);
+        String emailToken = UUID.randomUUID().toString();
+        user.setEmailToken(emailToken);
+        user saveduser = userRepo.save(user);
+        String emailLink = Helper.getLinkForEmailVerificatiton(emailToken);
+        mailService.sendEmail(saveduser.getEmail(), "Verify Account : Smart Contact Manager", emailLink);
+        return saveduser;
 
     }
 

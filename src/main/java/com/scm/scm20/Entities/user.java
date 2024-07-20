@@ -45,7 +45,7 @@ public class user implements UserDetails {
     private String about;
     private String profilepic;
     private String mobileNumber;
-    private boolean enable = true;
+    private boolean enable = false;
     private boolean varifiedEmail = false;
     private boolean varifiedMobile = false;
 
@@ -58,6 +58,8 @@ public class user implements UserDetails {
 
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> role = new ArrayList<>();
+
+    private String emailToken;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

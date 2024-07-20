@@ -4,13 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
 import com.scm.scm20.services.serviceimpl.secutrityCustomUserDetailService;
 
 @Configuration
@@ -23,6 +21,9 @@ public class securityconfig {
 
     @Autowired
     private oauthenticationSucessHandler handler;
+
+    @Autowired
+    private AuthFailureHandler authFailureHandler;
 
     // configuraiton of authentication providerfor spring security
     @Bean
@@ -63,6 +64,7 @@ public class securityconfig {
             formLogin.usernameParameter("email");
             formLogin.passwordParameter("password");
 
+            formLogin.failureHandler(authFailureHandler);
         });
 
         httpSecurity.csrf(AbstractHttpConfigurer::disable);

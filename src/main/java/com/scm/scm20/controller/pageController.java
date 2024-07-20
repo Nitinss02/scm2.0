@@ -95,6 +95,7 @@ public class pageController {
         user2.setAbout(userform.getAbout());
         user2.setMobileNumber(userform.getMobileNumber());
         user2.setProfilepic("/images/nature_background.jpg");
+        user2.setEnable(false);
         user saveUser = userServices.saveUser(user2);
         System.out.println(saveUser);
         System.out.println("Process Registration");
