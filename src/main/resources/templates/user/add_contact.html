@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" th:replace="~{base :: parent(~{::#content},~{::title},~{::script})}">
+<html lang="en" th:replace="~{base :: parent(~{::#content},~{::title},~{::script},~{::footer})}">
 
 <head>
     <title>This is a Add Contact page</title>
@@ -173,6 +173,7 @@
 
     </div>
     </div>
+    <footer></footer>
     <script data-th-src="@{'/js/admin.js'}"></script>
     <script>
         console.log("This is profile page console");

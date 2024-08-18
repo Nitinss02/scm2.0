@@ -14,8 +14,8 @@ public class mailServiceImpl implements EmailService {
     @Autowired
     private JavaMailSender javaMailSender;
 
-    @Value("${spring.mail.properties.domain_name}")
-    private String domainName;
+    // @Value("${spring.mail.properties.domain_name}")
+    // private String domainName;
 
     @Override
     public void sendEmail(String to, String subject, String body) {
@@ -23,7 +23,7 @@ public class mailServiceImpl implements EmailService {
         message.setTo(to);
         message.setSubject(subject);
         message.setText(body);
-        message.setFrom(domainName);
+        message.setFrom("nitin@demomailtrap.com");
         javaMailSender.send(message);
     }
 

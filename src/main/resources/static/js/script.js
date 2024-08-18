@@ -47,7 +47,10 @@ function changeThemePage(Theme, oldTheme) {
     setTheme(currentTheme);
     document.querySelector("html").classList.remove(oldTheme);
     document.querySelector("html").classList.add(Theme);
+    var thembtn = document.querySelector("#theme_change_btn");
 
-    document.querySelector("#theme_change_btn").querySelector("span").textContent = Theme == "light" ? "dark" : "light";
+    thembtn.querySelector("span").textContent = Theme == "light" ? "dark" : "light";
+    // thembtn.querySelector("i").className == "fa-regular fa-lightbulb" ? "fa-regular fa-lightbulb" : "fa-solid fa-moon"
+
 
 }

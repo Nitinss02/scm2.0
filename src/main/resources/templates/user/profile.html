@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" th:replace="~{base :: parent(~{::#content},~{::title},~{::script})}">
+<html lang="en" th:replace="~{base :: parent(~{::#content},~{::title},~{::script},~{::footer})}">
 
 <head>
     <title data-th-text="${loggedInUser.name}+ ' | SCM'">This is an profile page</title>
@@ -11,15 +11,28 @@
             <!-- <div data-th-replace="~{user/user_navbar::user_navbar}"></div> -->
             <div data-th-replace="~{user/sideBar::sideBar}"></div>
         </div>
-        <div class="bg-red-400 pt-20 p-0 sm:pl-72" style="height: 1000px;">
-            <h1>This is an profile page</h1>
-            <h2>we can perfrom profile opertation in it</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, vel similique esse accusamus recusandae
-                mollitia. Eos facere nobis autem voluptates natus illum adipisci deserunt possimus odio, doloribus,
-                fugiat
-                vero sit.</p>
+        <div class="bg-gray-200 dark:bg-gray-700  pt-20 p-0 sm:pl-72" style="height: 705px;">
+            <div class="max-w-md mx-auto mt-16">
+                <div
+                    class="bg-gradient-to-br from-indigo-300  to-red-300  shadow-2xl shadow-black dark:shadow-gray-800 dark:shadow-xl dark:bg-gray-800 p-6 rounded-xl text-center">
+                    <img data-th-src="@{${loggedInUser.profilepic}}" alt="User Avatar"
+                        class="w-20 h-20 rounded-full mx-auto mb-4">
+                    <i class="fa-regular fa-circle-down delay-500 ease-in-out translate-y-20 animate-bounce"></i>
+                    <h2 class="text-xl font-semibold mb-4 capitalize" data-th-text="${loggedInUser.name}">John
+                        Doe</h2>
+                    <p class=" mb-4" data-th-text="${loggedInUser.email}">john.doe@example.com</p>
+                    <p class="" data-th-text="${loggedInUser.MobileNumber}">Location: New York, USA</p>
+                    <p class="" data-th-text="${loggedInUser.about}">Age: 30</p>
+                    <!-- Add more relevant user information here -->
+                    <div class="flex md:justify-between">
+                        <p>Email Verified : <span data-th-text="${loggedInUser.varifiedEmail?'Yes':'No'}"></span></p>
+                        <p>Phone Verified : <span data-th-text="${loggedInUser.varifiedMobile?'Yes':'No'}"></span></p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+    <footer></footer>
     <script>
         console.log("This is profile page console");
     </script>

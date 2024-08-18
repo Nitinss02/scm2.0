@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" th:replace="~{base :: parent(~{::#content},~{::title},~{::script})}">
+<html lang="en" th:replace="~{base :: parent(~{::#content},~{::title},~{::script},~{::footer})}">
 
 <head>
     <title data-th-text="${loggedInUser.name}+ ' | Dashboard'">This is an profile page</title>
@@ -109,6 +109,7 @@
 
         </div>
     </div>
+    <footer></footer>
     <script>
         console.log("This is profile page console");
     </script>
